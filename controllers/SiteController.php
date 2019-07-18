@@ -61,7 +61,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $name = 'hilary';
+        return $this->render('index', ['username'=>$name]);
     }
 
     /**
