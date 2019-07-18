@@ -12,4 +12,5 @@ class TeacherController extends Controller
         $name = 'hilary';
         return $this->render('student', ['username'=>$name]);
     }
+
 }
