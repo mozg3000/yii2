@@ -9,7 +9,7 @@
 namespace app\models;
 
 
-class day
+class Day
 {
     public $isWeekend;
     public $hollyday;
