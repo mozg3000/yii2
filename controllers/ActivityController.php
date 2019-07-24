@@ -11,6 +11,6 @@ class ActivityController extends BaseController
 {
     public function actions()
     {
-        return ['create'=>['class'=>CreateAction::class],'classEntity'=>Activity::class];
+        return ['create'=>['class'=>CreateAction::class,'classEntity'=>Activity::class]];
     }
 }

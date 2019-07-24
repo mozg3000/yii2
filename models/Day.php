@@ -14,4 +14,5 @@ class Day
     public $isWeekend;
     public $hollyday;
     public $activities = [];
+    
 }
