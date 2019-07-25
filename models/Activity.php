@@ -16,7 +16,7 @@ class Activity extends BaseModel
 {
     public $title;
     public $description;
-    public $creator;
+    public $startday;
     public $responsible;
     public $deadline;
     public $isIterated;
@@ -43,8 +43,8 @@ class Activity extends BaseModel
         return [
             [['title', 'email'], 'trim'],
             ['image','file','extensions' => ['jpg','png']],
-            [['title', 'deadline'], 'required','message' => 'Обязательно!!!'],
-            ['deadline', 'date', 'format' => 'php:Y-m-d'],
+            [['title'], 'required','message' => 'Обязательно!!!'],
+            ['deadline', 'startday', 'date', 'format' => 'php:Y-m-d'],
 //        ['phone','string','length' => 10],
             ['description', 'string', 'min' => 5, 'max' => 300],
             [['creator', 'responsible', 'deadline'], 'string'],
@@ -52,9 +52,9 @@ class Activity extends BaseModel
             ['email', 'email'],
             ['emailRepeat', 'email'],
 //            ['title','match','pattern' => '/^[a-z]{0,}/ig'],
-//            ['email', 'required', 'when' => function (Activity $model) {
-//                return $model->useNotification ? true : false;
-//            }],
+            ['email', 'required', 'when' => function (Activity $model) {
+                return $model->useNotification ? true : false;
+            }],
             ['iteratedType','in','range' => array_keys(self::REPEAT_TYPE)],
             ['emailRepeat','compare','compareAttribute' => 'email'],
             ['title','titleValidate'],

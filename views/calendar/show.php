@@ -6,7 +6,7 @@
  * Time: 12:41
  */
 ?>
-<a type="button" class="btn btn-primary"
-href="/">
-    Создать событие
+<a class="btn btn-primary"
+href="/single/day">
+    Посмотреть какое-то из событий
 </a>

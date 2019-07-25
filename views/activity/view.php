@@ -3,8 +3,13 @@
  * @var \app\models\Activity $model
  */
 ?>
-    <p>Заголовок <strong><?=$model->title?></strong></p>
+    <p><strong><?=$model->title?></strong></p>
+    <p><strong><?=$model->description?></strong></p>
+    <p>Начало:     <strong><?=$model->startday?></strong></p>
+    <p>Окончание:   <strong><?=$model->deadline?></strong></p>
+    <p>Ответственный:   <strong><?=$model->responsible?></strong></p>
 
-<?=\yii\helpers\Html::tag('span','');?>
-
-<?=\yii\helpers\Html::img('/images/'.$model->image, ['width'=>150]);?>
+<a class="btn btn-primary"
+   href="/activity/edit">
+    Редактировать событие
+</a>

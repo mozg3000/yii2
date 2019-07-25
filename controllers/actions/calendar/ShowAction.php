@@ -6,7 +6,7 @@
  * Time: 12:23
  */
 
-namespace app\controllers\calendar;
+namespace app\controllers\actions\calendar;
 
 
 use app\base\BaseAction;
@@ -17,8 +17,8 @@ class ShowAction extends BaseAction
 
     public function run(){
 
-        $activity = new $this->classEntity();
+        $show = new $this->classEntity();
 
-        return $this->controller->render('show',['model'=>$activity]);
+        return $this->controller->render('show',['model'=>$show]);
     }
 }

@@ -10,7 +10,7 @@ namespace app\controllers;
 
 
 use app\base\BaseController;
-use app\controllers\calendar\ShowAction;
+use app\controllers\actions\calendar\ShowAction;
 use app\models\calendar\Show;
 
 

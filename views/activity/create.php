@@ -11,7 +11,7 @@ use yii\bootstrap\ActiveForm;
 <? //= Yii::getAlias('@webroot'); ?><!--<br>-->
 <?= $form->field($model, 'title'); ?>
 <?= $form->field($model, 'description')->textarea(); ?>
-<?= $form->field($model, 'creator')->textarea(); ?>
+<?= $form->field($model, 'startday')->input('text'); ?>
 <?= $form->field($model, 'responsible')->textarea(); ?>
 <!--/ В формате HTML5 нежелательно, т.к. отправка в разных форматах м.б., лучше любой виджет js-->
 <?= $form->field($model, 'deadline')->input('text'); ?>
