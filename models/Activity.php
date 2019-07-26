@@ -16,7 +16,7 @@ class Activity extends BaseModel
 {
     public $title;
     public $description;
-    public $startday;
+//    public $startday;
     public $responsible;
     public $deadline;
     public $isIterated;
@@ -71,7 +71,7 @@ class Activity extends BaseModel
         return [
             'title' => 'Заголовок',
             'description' => 'Описание',
-            'creator' => 'Создатель',
+            'startday' => 'Начало',
             'responsible' => 'Ответственный',
             'deadline' => 'Дедлайн',
             'email'=>'email',
