@@ -52,9 +52,9 @@ class Activity extends BaseModel
             ['email', 'email'],
             ['emailRepeat', 'email'],
 //            ['title','match','pattern' => '/^[a-z]{0,}/ig'],
-//            ['email', 'required', 'when' => function (Activity $model) {
-//                return $model->useNotification ? true : false;
-//            }],
+            ['email', 'required', 'when' => function (Activity $model) {
+                return $model->useNotification ? true : false;
+            }],
             ['iteratedType','in','range' => array_keys(self::REPEAT_TYPE)],
             ['emailRepeat','compare','compareAttribute' => 'email'],
             ['title','titleValidate'],
