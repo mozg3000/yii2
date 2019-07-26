@@ -16,7 +16,7 @@ class Activity extends BaseModel
 {
     public $title;
     public $description;
-//    public $startday;
+    public $startday;
     public $responsible;
     public $deadline;
     public $isIterated;
