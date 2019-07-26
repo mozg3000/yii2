@@ -78,7 +78,7 @@ class Activity extends BaseModel
             'emailRepeat'=>'email повторно',
             'isIterated' => 'Повторяется',
             'isBlocked' => 'Сделать единственным событием за день',
-            'useNotification'=>'получать уведомления по email'
+            'useNotification'=>'Напомнить по email'
         ];
     }
 }

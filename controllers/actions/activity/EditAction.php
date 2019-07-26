@@ -10,6 +10,7 @@ namespace app\controllers\actions\activity;
 
 
 use app\base\BaseAction;
+use app\models\Activity;
 use yii\widgets\ActiveForm;
 
 class EditAction extends BaseAction
@@ -23,7 +24,24 @@ class EditAction extends BaseAction
 
         $activity = \Yii::$app->activity->getEntity();
 
+        if(\Yii::$app->request->isGet){
 
+            $activity = new Activity();
+            $activity->title = \Yii::$app->request->get('title');
+            $activity->startday = \Yii::$app->request->get('startday');
+            $activity->deadline = \Yii::$app->request->get('deadline');
+            $activity->responsible = \Yii::$app->request->get('responsible');
+            $activity->description = \Yii::$app->request->get('description');
+        }
+        if(\Yii::$app->request->isPost){
+            //$activity->load(\Yii::$app->request->post());
+            if(\Yii::$app->request->isAjax){
+                \Yii::$app->response->format=Response::FORMAT_JSON;
+                return ActiveForm::validate($activity);
+            }
+
+            return $this->controller->redirect('/calendar/show');
+        }
         return $this->controller->render('edit',['model'=>$activity]);
     }
 }

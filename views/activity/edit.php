@@ -16,6 +16,7 @@ use yii\bootstrap\ActiveForm;
     <!--/ В формате HTML5 нежелательно, т.к. отправка в разных форматах м.б., лучше любой виджет js-->
 <?= $form->field($model, 'deadline')->input('text'); ?>
 <?= $form->field($model, 'responsible')->textarea(); ?>
+<?= $form->field($model, 'useNotification')->checkbox(); ?>
 
     <div class="form-group">
         <button class="btn btn-default" type="submit">Сохранить</button>

@@ -25,6 +25,7 @@ class ShowAction extends BaseAction
         $activity->startday = "12.12.2012";
         $activity->responsible = "You";
         $activity->deadline = "12.12.2012";
+        $activity->useNotification = true;
 
         return $this->controller->render('view',['model'=>$activity]);
     }
