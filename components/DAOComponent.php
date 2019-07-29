@@ -56,4 +56,24 @@ class DAOComponent
 
         return $res['email'] === $email;
     }
+    public function findUser($id)
+    {
+        $res = (new Query())->from('users')
+            ->select(['id', 'email'])
+            ->andWhere(['id' => $id])
+            ->one($this->getConnection());
+
+        return $res['email'];
+    }
+    public function findUserActivities($id)
+    {
+        $res = (new Query())->from(['activity', 'users'])
+            ->select(['users.email', 'activity.title', 'activity.startday'])
+            ->andWhere(['activity.user_id' => $id,
+                'users.id' => $id])
+//            ->andWhere(['users.id' => $id])
+            ->one($this->getConnection());
+
+        return $res;
+    }
 }

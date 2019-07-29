@@ -44,4 +44,18 @@
             ?>
         </pre>
     </div>
+    <div class="col-md-6">
+        <pre>
+            <?php
+                print_r($email);
+            ?>
+        </pre>
+    </div>
+    <div class="col-md-6">
+        <pre>
+            <?php
+                print_r($userActivities);
+            ?>
+        </pre>
+    </div>
 </div>

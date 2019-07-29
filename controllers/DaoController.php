@@ -22,13 +22,17 @@ class DaoController extends BaseController
         $firstActivity = $dao->getFirstActivity();
         $count = $dao->getActivityCount();
         $auth = $dao->validatePassword('test@email.dom','dghdsfth');
+        $email = $dao->findUser(1);
+        $userActivities = $dao->findUserActivities(1);
 
         return $this->render('index', [
             'users' => $users,
             'activities' => $activities,
             'firstActivity' => $firstActivity,
             'count' => $count,
-            'auth' => $auth
+            'auth' => $auth,
+            'email' => $email,
+            'userActivities' => $userActivities
         ]);
     }
 
