@@ -36,6 +36,10 @@ class Activity extends ActivityBase
         if ($date) {
             $this->deadline = $date->format('Y-m-d');
         }
+        $date = \DateTime::createFromFormat('d.m.Y', $this->startday);
+        if ($date) {
+            $this->startday = $date->format('Y-m-d');
+        }
         return parent::beforeValidate();
     }
     public function rules()
