@@ -24,7 +24,7 @@ class Activity extends ActivityBase
 //    public $email;
     public $emailRepeat;
     public $image;
-    public $useNotification;
+//    public $useNotification;
 //    public $isBlocked;
     const REPEAT_TYPE=[
         0=>'Каждый день',

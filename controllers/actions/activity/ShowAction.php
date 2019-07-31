@@ -37,7 +37,7 @@ class ShowAction extends BaseAction
 //        $activity->responsible = "You";
 //        $activity->deadline = "12.12.2012";
 //        $activity->useNotification = true;
-
+//return var_dump($model->useNotification);
         return $this->controller->render('view',['model'=>$model]);
     }
 }
