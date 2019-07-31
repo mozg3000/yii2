@@ -20,6 +20,10 @@ $config = [
       ]
     ],
     'components' => [
+        'rbac'=>['class'=>\app\components\RbacComponent::class],
+        'authManager'=>[
+          'class'=>\yii\rbac\DbManager::class
+        ],
         'auth' => ['class' => \app\components\AuthComponent::class],
         'activity' => ['class' => \app\components\ActivityComponent::class,
             'classEntity' => \app\models\Activity::class],

@@ -3,11 +3,11 @@
  * @var \app\models\Activity $model
  */
 ?>
+    <p><strong><?=$model->user->email?></strong></p>
     <p><strong><?=$model->title?></strong></p>
     <p><strong><?=$model->description?></strong></p>
     <p>Начало:     <strong><?=$model->startday?></strong></p>
     <p>Окончание:   <strong><?=$model->deadline?></strong></p>
-    <p>Ответственный:   <strong><?=$model->responsible?></strong></p>
 <input name="useNotificationBox" type="checkbox" checked="<?php if($model->useNotification){echo 'checked';}?>" disabled></input>
 <label for="useNotificationBox">Напомнить по email</label></br>
 

@@ -12,20 +12,20 @@ use app\models\validations\TitleValidation;
 use app\base\BaseModel;
 use yii\base\Model;
 
-class Activity extends BaseModel
+class Activity extends ActivityBase
 {
-    public $title;
-    public $description;
-    public $startday;
+//    public $title;
+//    public $description;
+//    public $startday;
     public $responsible;
-    public $deadline;
+//    public $deadline;
     public $isIterated;
     public $iteratedType;
-    public $email;
+//    public $email;
     public $emailRepeat;
     public $image;
     public $useNotification;
-    public $isBlocked;
+//    public $isBlocked;
     const REPEAT_TYPE=[
         0=>'Каждый день',
         1=>'Каждую неделю'
