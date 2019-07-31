@@ -27,7 +27,7 @@ class CreateAction extends BaseAction
 //            'classEntity' => Activity::class]);
         if(!\Yii::$app->rbac->canCreateActivity()){
 
-            throw new HttpException(403, 'Authorize');
+            throw new HttpException(403, 'Not authorize access');
         }
 
 //        $activity = \Yii::$app->activity->getEntity();
@@ -38,19 +38,19 @@ class CreateAction extends BaseAction
 
         if(\Yii::$app->request->isPost){
             $activity->load(\Yii::$app->request->post());
+
             if(\Yii::$app->request->isAjax){
                 \Yii::$app->response->format=Response::FORMAT_JSON;
                 return ActiveForm::validate($activity);
             }
 
-            if(\Yii::$app->activity->createActivity($activity)){
-
+            //if(\Yii::$app->activity->createActivity($activity)){
                 $activity->user_id = \Yii::$app->user->getId();
                 $activity->save();
-                return var_dump($activity->id);
+//                return var_dump($activity->id, $activity->title);
 
-                return $this->controller->redirect('/activity/show', ['id' => $activity->id]);
-            }
+                return $this->controller->redirect(["/activity/show",'id'=>$activity->id]);
+            //}
         }
 
         return $this->controller->render('create', ['model'=>$activity]);

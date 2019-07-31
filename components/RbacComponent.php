@@ -51,7 +51,7 @@ class RbacComponent extends Component
         $authManadger->add($viewAllActivities);
 
         $authManadger->addChild($user, $createActivity);
-        $authManadger->addChild($admin, $viewOwnerActivity);
+        $authManadger->addChild($user, $viewOwnerActivity);
         $authManadger->addChild($admin,$user);
         $authManadger->addChild($admin, $viewAllActivities);
 
@@ -63,12 +63,13 @@ class RbacComponent extends Component
 
         return \Yii::$app->user->can('createActivity');
     }
-    public function canChangeActivity(Activity $activity):bool{
+    public function canChangeActivity(Activity $activity){
 
         if(\Yii::$app->user->can('viewAllActivities')){
 
             return true;
         }
+//        return var_dump(\Yii::$app->user->can('viewOwnerActivity', ['activity' => $activity]));
         if(\Yii::$app->user->can('viewOwnerActivity', ['activity' => $activity])){
 
             return true;
@@ -77,7 +78,7 @@ class RbacComponent extends Component
     }
     public function removeAll(){
 
-        $authManadger = $this->getAuthManager();
-        $authManadger->removeAll();
+        $authManager = $this->getAuthManager();
+        $authManager->removeAll();
     }
 }

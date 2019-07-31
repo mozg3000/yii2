@@ -24,7 +24,7 @@ class ShowAction extends BaseAction
 
             throw new HttpException(404, 'Activity not found');
         }
-
+//        return var_dump(\Yii::$app->rbac->canChangeActivity($model));
         if(!\Yii::$app->rbac->canChangeActivity($model)){
 
             throw new HttpException(403, 'Not permit');
