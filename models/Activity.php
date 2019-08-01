@@ -50,14 +50,16 @@ class Activity extends ActivityBase
             [['deadline','startday'], 'date', 'format' => 'php:Y-m-d'],
             [['responsible', 'deadline'], 'string'],
             [['isIterated', 'isBlocked', 'useNotification'], 'boolean'],
-            ['email', 'email'],
-            ['emailRepeat', 'email'],
-//            ['title','match','pattern' => '/^[a-z]{0,}/ig'],
-            ['email', 'required', 'when' => function (Activity $model) {
+            [['email','emailRepeat'], 'email'],
+            [['email','emailRepeat'], 'required', 'when' => function (Activity $model) {
                 return $model->useNotification ? true : false;
             }],
             ['iteratedType','in','range' => array_keys(self::REPEAT_TYPE)],
             ['emailRepeat','compare','compareAttribute' => 'email'],
+            ['deadline', 'default', 'value' => function($model){
+                return $model->startday;
+            }],
+            ['deadline', 'compare', 'compareValue' => 'startday', 'operator' => '>=', 'type' => 'date']
         ],
             parent::rules());
     }

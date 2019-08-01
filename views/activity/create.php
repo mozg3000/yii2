@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
 
 <?= $form->field($model, 'useNotification')->checkbox(); ?>
 <?= $form->field($model, 'email', ['enableAjaxValidation' => true, 'enableClientValidation' => false]); ?>
-<?= $form->field($model, 'emailRepeat'); ?>
+<?= $form->field($model, 'emailRepeat', ['enableAjaxValidation' => true, 'enableClientValidation' => false]); ?>
 
 <?= $form->field($model,'image')->fileInput()?>
 
