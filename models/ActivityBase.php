@@ -36,8 +36,8 @@ class ActivityBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'startday', 'user_id'], 'required'],
-            [['description'], 'string'],
+            [['title', 'startday', 'user_id'], 'required', 'message' => 'Обязательное поле!!!'],
+            [['description'], 'string', 'min' => 5, 'max' => 300],
             [['startday', 'deadline', 'createAt'], 'safe'],
             [['isBlocked', 'useNotification', 'user_id'], 'integer'],
             [['title', 'email'], 'string', 'max' => 150],

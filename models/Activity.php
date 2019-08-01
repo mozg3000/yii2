@@ -44,13 +44,10 @@ class Activity extends ActivityBase
     }
     public function rules()
     {
-        return [
+        return array_merge([
             [['title', 'email'], 'trim'],
             ['image','file','extensions' => ['jpg','png']],
-            [['title', 'startday'], 'required','message' => 'Обязательно!!!'],
             [['deadline','startday'], 'date', 'format' => 'php:Y-m-d'],
-//        ['phone','string','length' => 10],
-            ['description', 'string', 'min' => 5, 'max' => 300],
             [['responsible', 'deadline'], 'string'],
             [['isIterated', 'isBlocked', 'useNotification'], 'boolean'],
             ['email', 'email'],
@@ -61,9 +58,8 @@ class Activity extends ActivityBase
             }],
             ['iteratedType','in','range' => array_keys(self::REPEAT_TYPE)],
             ['emailRepeat','compare','compareAttribute' => 'email'],
-            ['title','titleValidate'],
-            ['title',TitleValidation::class,'list' => ['admin','Шаурма']]
-        ];
+        ],
+            parent::rules());
     }
     public function titleValidate($attr){
         if($this->title=='admin'){
