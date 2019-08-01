@@ -11,12 +11,24 @@
 <!--    Посмотреть какое-то из событий-->
 <!--</a>-->
 
-<?php //var_dump($model[0][0])?>
-<?php foreach ($model as $activity) :?>
-    <!--    --><?php //var_dump($activity[0]['title'])?>
+<?php //var_dump(count($model))?>
+<?php if (count($model)===0):?>
+
+    <h2>У вас пока нет активностей</h2>
+
     <a class="btn btn-default"
-    href="/single/day?startday=<?=$activity->startday?>">
-    <?=$activity->startday?> нажать, чтобы увидеть данную активность.
-<!--    --><?php //var_dump($activity->startday)?>
+       href="/activity/create">
+        Добавить
     </a></br>
-<?php endforeach;?>
+<?php else:?>
+<!---->
+    <?php foreach ($model as $activity) :?>
+        <!--    --><?php //var_dump($activity[0]['title'])?>
+        <a class="btn btn-default"
+           href="/single/day?startday=<?=$activity->startday?>">
+            <?=$activity->startday?> нажать, чтобы увидеть активности в этот день.
+            <!--    --><?php //var_dump($activity->startday)?>
+        </a></br>
+    <?php endforeach;?>
+
+<?php endif;?>

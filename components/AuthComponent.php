@@ -56,6 +56,9 @@ class AuthComponent extends Component
 
        if( $model->save()){
 
+           $user = \Yii::$app->authManager->getRole('user');
+           \Yii::$app->authManager->assign($user, $model->getId());
+
            return true;
        }
        return false;

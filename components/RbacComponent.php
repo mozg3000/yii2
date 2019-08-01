@@ -32,7 +32,6 @@ class RbacComponent extends Component
         $user = $authManadger->createRole('user');
         $user->description = 'Роль пользователя';
         $authManadger->add($user);
-
         $createActivity = $authManadger->createPermission('createActivity');
         $createActivity->description = 'Создание активностей';
         $authManadger->add($createActivity);

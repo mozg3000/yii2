@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\models\Activity;
 use app\models\Users;
 use yii\web\Controller;
 
@@ -25,7 +26,7 @@ class AuthController extends Controller
 
             if(\Yii::$app->auth->signUp($model)){
 
-                return $this->redirect(['/auth/sing-in', 'id' => $model->id]);
+                return $this->redirect(['/auth/sing-in']);
             }
         }
 
@@ -34,6 +35,9 @@ class AuthController extends Controller
     public function actionSignIn(){
 
         $model = new Users();
+//        $model = Activity::find()->andWhere('id=:id', [':id' => $id]);
+
+//        return var_dump($model);
 
         if(\Yii::$app->request->isPost){
 
