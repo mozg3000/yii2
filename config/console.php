@@ -16,6 +16,8 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'activity' => ['class' => \app\components\ActivityComponent::class,
+            'classEntity' => \app\models\Activity::class],
         'rbac'=>['class'=>\app\components\RbacComponent::class],
         'authManager'=>[
             'class'=>\yii\rbac\DbManager::class
@@ -32,6 +34,19 @@ $config = [
             ],
         ],
         'db' => $db,
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'enableSwiftMailerLogging' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'geekbrains@onedeveloper.ru',
+                'password' => '112358njkz_',
+                'encryption' => 'tls',
+                'port' => '587'
+            ]
+        ],
     ],
     'params' => $params,
     /*

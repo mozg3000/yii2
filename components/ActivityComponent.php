@@ -54,4 +54,15 @@ class ActivityComponent extends Component
     {
         return time() . '_' . $file->getBaseName() . '.' . $file->getExtension();
     }
+    /**
+     * @return Activity[]|null
+     */
+    public function getActiveActivityTodayNotification(): array {
+
+        $result = Activity::find()->
+                            andWhere('startday >= :date', [':date' => date('Y-m-d')])
+                        -> andWhere(['useNotification' => 1])
+                        -> all();
+        return $result;
+    }
 }
