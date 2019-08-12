@@ -10,6 +10,7 @@ namespace app\controllers\actions\calendar;
 
 
 use app\base\BaseAction;
+use app\models\Activity;
 
 class ShowAction extends BaseAction
 {
@@ -17,8 +18,17 @@ class ShowAction extends BaseAction
 
     public function run(){
 
-        $show = new $this->classEntity();
+        //$show = new $this->classEntity();
+        $user_id = \Yii::$app->user->getId();
 
-        return $this->controller->render('show',['model'=>$show]);
+        $model = Activity::find()
+                                ->select(['startday'])
+
+                                ->andWhere('user_id=:user_id', [':user_id' => $user_id])
+                                ->distinct()
+                                ->groupBy(['startday'])
+                                ->all();
+
+        return $this->controller->render('show',['model'=>$model]);
     }
 }

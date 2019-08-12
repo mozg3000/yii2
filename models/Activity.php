@@ -12,20 +12,20 @@ use app\models\validations\TitleValidation;
 use app\base\BaseModel;
 use yii\base\Model;
 
-class Activity extends BaseModel
+class Activity extends ActivityBase
 {
-    public $title;
-    public $description;
-    public $startday;
+//    public $title;
+//    public $description;
+//    public $startday;
     public $responsible;
-    public $deadline;
+//    public $deadline;
     public $isIterated;
     public $iteratedType;
-    public $email;
+//    public $email;
     public $emailRepeat;
     public $image;
-    public $useNotification;
-    public $isBlocked;
+//    public $useNotification;
+//    public $isBlocked;
     const REPEAT_TYPE=[
         0=>'Каждый день',
         1=>'Каждую неделю'
@@ -36,30 +36,32 @@ class Activity extends BaseModel
         if ($date) {
             $this->deadline = $date->format('Y-m-d');
         }
+        $date = \DateTime::createFromFormat('d.m.Y', $this->startday);
+        if ($date) {
+            $this->startday = $date->format('Y-m-d');
+        }
         return parent::beforeValidate();
     }
     public function rules()
     {
-        return [
+        return array_merge([
             [['title', 'email'], 'trim'],
             ['image','file','extensions' => ['jpg','png']],
-            [['title', 'startday'], 'required','message' => 'Обязательно!!!'],
             [['deadline','startday'], 'date', 'format' => 'php:Y-m-d'],
-//        ['phone','string','length' => 10],
-            ['description', 'string', 'min' => 5, 'max' => 300],
             [['responsible', 'deadline'], 'string'],
             [['isIterated', 'isBlocked', 'useNotification'], 'boolean'],
-            ['email', 'email'],
-            ['emailRepeat', 'email'],
-//            ['title','match','pattern' => '/^[a-z]{0,}/ig'],
-            ['email', 'required', 'when' => function (Activity $model) {
+            [['email','emailRepeat'], 'email'],
+            [['email','emailRepeat'], 'required', 'when' => function (Activity $model) {
                 return $model->useNotification ? true : false;
             }],
             ['iteratedType','in','range' => array_keys(self::REPEAT_TYPE)],
             ['emailRepeat','compare','compareAttribute' => 'email'],
-            ['title','titleValidate'],
-            ['title',TitleValidation::class,'list' => ['admin','Шаурма']]
-        ];
+            ['deadline', 'default', 'value' => function($model){
+                return $model->startday;
+            }],
+            ['deadline', 'compare', 'compareValue' => 'startday', 'operator' => '>=', 'type' => 'date']
+        ],
+            parent::rules());
     }
     public function titleValidate($attr){
         if($this->title=='admin'){

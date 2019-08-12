@@ -17,4 +17,9 @@ class ActivityController extends BaseController
             'show'=> ['class'=>ShowAction::class,'classEntity'=>Activity::class],
             'edit' => ['class'=>EditAction::class,'classEntity'=>Activity::class]];
     }
+
+//    public function actionCreate(){
+//
+//        return "OK";
+//    }
 }
