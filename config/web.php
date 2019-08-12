@@ -20,7 +20,7 @@ $config = [
       ]
     ],
     'components' => [
-
+        'dao' => ['class' => \app\components\DAOComponent::class],
         'activity' => ['class' => \app\components\ActivityComponent::class,
             'classEntity' => \app\models\Activity::class],
         'users' => ['class' => \app\components\UsersComponent::class],

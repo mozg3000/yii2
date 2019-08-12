@@ -35,5 +35,13 @@ class DaoController extends BaseController
             'userActivities' => $userActivities
         ]);
     }
+    public function actionCache(){
+
+        \Yii::$app->cache->set('tst', 'value');
+
+        $val = \Yii::$app->cache->get('tst');
+
+        echo $val;
+    }
 
 }

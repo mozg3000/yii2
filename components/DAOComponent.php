@@ -76,4 +76,5 @@ class DAOComponent
 
         return $res;
     }
+
 }
