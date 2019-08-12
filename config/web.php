@@ -21,7 +21,10 @@ $config = [
     ],
     'components' => [
 
-      'rbac'=>['class'=>\app\components\RbacComponent::class],
+
+        'users' => ['class' => \app\components\UsersComponent::class],
+        'rbac'=>['class'=>\app\components\RbacComponent::class],
+
         'authManager'=>[
           'class'=>\yii\rbac\DbManager::class
         ],
