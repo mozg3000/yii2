@@ -11,7 +11,13 @@ use app\models\Activity;
 $activities = [];
 foreach($model as $el){
 
-    $activities[date('j', strtotime($el->startday))] = ['startday' =>$el->startday, 'title' => $el->title];
+    if(array_key_exists(date('j', strtotime($el->startday)), $activities)){
+
+        array_push($activities[date('j', strtotime($el->startday))]['titles'], $el->title);
+    }else{
+
+        $activities[date('j', strtotime($el->startday))] = ['startday' =>$el->startday,'id' => $el->id, 'titles' => [$el->title]];
+    }
 }
 //print_r($activities);exit;
 // Вычисляем число дней в текущем месяце
@@ -59,6 +65,7 @@ echo "<table border=1>";
 for($i = 0; $i < count($week); $i++) {
     echo "<tr>";
     for($j = 0; $j < 7; $j++){
+        $day = '';
         if(!empty($week[$i][$j])) {
             // Если имеем дело с субботой и воскресенья
             // подсвечиваем их
@@ -66,9 +73,17 @@ for($i = 0; $i < count($week); $i++) {
             if($j == 5 || $j == 6)
                 echo "<td><font color=red>".$week[$i][$j]."</font></td>";
             else {
-//                print_r($activities[$i]);
                 if(array_key_exists($week[$i][$j], $activities)){
-                    echo "<td>".$week[$i][$j] . "<br> <a href='/single/day?startday=".  $activities[$week[$i][$j]]['startday'] ."'>". $activities[$week[$i][$j]]['title'] ." </a>></td>";
+//                    print_r($activities[$week[$i][$j]]['titles']);
+                    $day .= "<td> <a class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'>".$week[$i][$j] . "<br> ";
+                    foreach($activities[$week[$i][$j]]['titles'] as $title){
+
+//                        print_r($title);
+                        $day = $day . "<a href='/activity/show?id=" . $activities[$week[$i][$j]]['id'] ."'>". $title ." </a>";
+//                        $day = $day . $title;
+                    }
+                    $day .= "<br></td>";
+                    echo $day;
                 }else{
                     echo "<td>".$week[$i][$j] ."</td>";
                 }
