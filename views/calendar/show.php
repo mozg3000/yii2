@@ -75,14 +75,14 @@ for($i = 0; $i < count($week); $i++) {
             else {
                 if(array_key_exists($week[$i][$j], $activities)){
 //                    print_r($activities[$week[$i][$j]]['titles']);
-                    $day .= "<td> <a class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'>".$week[$i][$j] . "<br> ";
+                    $day .= "<td> <a class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'>".$week[$i][$j] . "  <<Посмотреть день</a><br>";
                     foreach($activities[$week[$i][$j]]['titles'] as $title){
 
 //                        print_r($title);
-                        $day = $day . "<a href='/activity/show?id=" . $activities[$week[$i][$j]]['id'] ."'>". $title ." </a>";
+                        $day = $day . "<a href='/activity/show?id=" . $activities[$week[$i][$j]]['id'] ."'>". $title ." </a><br>";
 //                        $day = $day . $title;
                     }
-                    $day .= "<br></td>";
+                    $day .= "</td>";
                     echo $day;
                 }else{
                     echo "<td>".$week[$i][$j] ."</td>";
