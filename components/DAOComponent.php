@@ -9,6 +9,9 @@
 namespace app\components;
 
 
+use yii\caching\DbDependency;
+use yii\caching\ExpressionDependency;
+use yii\caching\TagDependency;
 use yii\db\Query;
 
 class DAOComponent
@@ -21,29 +24,33 @@ class DAOComponent
 
         $sql = 'select * from `users`;';
 
-        return $this->getConnection()->createCommand($sql)->queryAll();
+        return $this->getConnection()->createCommand($sql)->cache(20)->queryAll();
     }
     public function getUserActivities($user_id){
 
         $sql = 'select * from activity where user_id=:user;';
 
         return $this->getConnection()->createCommand($sql, [':user' => $user_id])
+            ->cache(20, new DbDependency(['sql' => 'select max(id) from activity']))
             //->rawSql()
             ->queryAll();
     }
     public function getFirstActivity(){
 
+//        TagDependency::invalidate('tag1');
         return (new Query())->from('activity')
                             ->orderBy(['id'=> SORT_DESC])
                             ->select(['id', 'title'])
                             ->andWhere(['useNotification' => 1])
                             ->limit(3)
+                            ->cache(20, new TagDependency(['tags' => 'tag1']))
                             ->one($this->getConnection());
     }
     public function getActivityCount(){
 
         return (new Query())->from('activity')
             ->select(['id', 'title'])
+            ->cache(20)
             ->scalar($this->getConnection());
     }
     public function validatePassword($email, $pass_hash):bool {

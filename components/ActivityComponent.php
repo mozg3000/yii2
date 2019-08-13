@@ -65,4 +65,13 @@ class ActivityComponent extends Component
                         -> all();
         return $result;
     }
+    public function getUserActiveActivityTodayNotification($id): array {
+
+        $result = Activity::find()
+                        ->andWhere('user_id = :id', [':id' =>$id])
+                        -> andWhere('startday >= :date', [':date' => date('Y-m-d')])
+                        -> andWhere(['useNotification' => 1])
+                        -> all();
+        return $result;
+    }
 }

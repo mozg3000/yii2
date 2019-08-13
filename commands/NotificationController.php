@@ -37,8 +37,17 @@ class NotificationController extends Controller
 
         echo count($activities).PHP_EOL;
 
+
         $notification = \Yii::createObject(['class' => NotificationComponent::class, 'mailer' => \Yii::$app->mailer]);
         $notification->sendNotificationToActivity($activities);
 
+
+    }
+    public function actionSendToUser($id){
+
+        $activities = \Yii::$app->activity->getUserActiveActivityTodayNotification($id);
+        echo count($activities).PHP_EOL;
+        $notification = \Yii::createObject(['class' => NotificationComponent::class, 'mailer' => \Yii::$app->mailer]);
+        $notification->sendNotificationToUser($activities);
     }
 }

@@ -38,4 +38,26 @@ class NotificationComponent extends Component
             }
         }
     }
+    public function sendNotificationToUser($activities){
+
+//print_r($activities);exit();
+
+        if($activities){
+
+            $ok = $this->mailer->compose('user_notification', ['model' => $activities])
+                -> setSubject('События запланированные на сегодня')
+                -> setFrom('geekbrains@onedeveloper.ru')
+                -> setTo($activities[0]->email)
+                ->send();
+
+            if ($ok){
+
+                echo 'Письмо отправлено' . $activities[0]->email.PHP_EOL;
+            }else{
+
+                echo 'Ошибка отправки письма ' . $activities[0]->email.PHP_EOL;
+            }
+        }
+
+    }
 }
