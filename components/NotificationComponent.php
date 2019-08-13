@@ -45,7 +45,8 @@ class NotificationComponent extends Component
         if($activities){
 
             $ok = $this->mailer->compose('user_notification', ['model' => $activities])
-                -> setSubject('События запланированные на сегодня')
+                -> setSubject('События запланированные на 
+                сегодня')
                 -> setFrom('geekbrains@onedeveloper.ru')
                 -> setTo($activities[0]->email)
                 ->send();

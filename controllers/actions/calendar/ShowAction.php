@@ -22,13 +22,13 @@ class ShowAction extends BaseAction
         $user_id = \Yii::$app->user->getId();
 
         $model = Activity::find()
-                                ->select(['startday'])
+                                ->select(['id','startday', 'title'])
 
                                 ->andWhere('user_id=:user_id', [':user_id' => $user_id])
                                 ->distinct()
-                                ->groupBy(['startday'])
+//                                ->groupBy(['startday'])
                                 ->all();
-
+//print_r($model);exit();
         return $this->controller->render('show',['model'=>$model]);
     }
 }
