@@ -1,8 +1,30 @@
 <?php
 use app\models\Activity;
+//echo date('m', strtotime(Yii::$app->request->get('year') . '-' . (Yii::$app->request->get('month')-1) . '-01'));
 ?>
 
+<h2>
 
+    <a href="/calendar/show?year=<?=date('Y', strtotime(Yii::$app->request->get('year') . '-' . Yii::$app->request->get('month') . '-01'))?>&month=<?=date('m', strtotime(Yii::$app->request->get('year') . '-' . (Yii::$app->request->get('month')-1) . '-01'))?>">
+        <
+    </a>
+
+    <?php
+
+    if(!$date->format('F Y')){
+
+        echo date('F Y', strtotime(Yii::$app->request->get('year') . '-' . Yii::$app->request->get('month') . '-01'));
+    }else{
+
+        echo $date->format('F Y');
+
+    }
+    ?>
+    <a href="/calendar/show?year=<?=date('Y', strtotime(Yii::$app->request->get('year') . '-' . Yii::$app->request->get('month') . '-01'))?>&month=<?=date('m', strtotime(Yii::$app->request->get('year') . '-' . (Yii::$app->request->get('month')+1) . '-01'))?>">
+        >
+    </a>
+
+</h2>
 <?php
 /**
 * @var Activity[] $model
@@ -19,6 +41,7 @@ foreach($model as $el){
         $activities[date('j', strtotime($el->startday))] = ['startday' =>$el->startday,'id' => $el->id, 'titles' => [$el->title]];
     }
 }
+
 //print_r($activities);exit;
 // Вычисляем число дней в текущем месяце
 $dayofmonth = date('t');
@@ -62,6 +85,17 @@ while(true){
 // в виде календаря
 // Выводим таблицу
 echo "<table border=1>";
+//for($k=0;$k<7:$k++){
+    echo '<tr>';
+   echo '<th>ПН</th>';
+   echo '<th>ВТ</th>';
+   echo '<th>СР</th>';
+   echo '<th>ЧТ</th>';
+   echo '<th>ПТ</th>';
+   echo '<th>СБ</th>';
+   echo '<th>ВС</th>';
+    echo '</tr>';
+//}
 for($i = 0; $i < count($week); $i++) {
     echo "<tr>";
     for($j = 0; $j < 7; $j++){
@@ -70,12 +104,27 @@ for($i = 0; $i < count($week); $i++) {
             // Если имеем дело с субботой и воскресенья
             // подсвечиваем их
 //            print_r((array_key_exists($week[$i][$j], $activities)));
-            if($j == 5 || $j == 6)
-                echo "<td><font color=red>".$week[$i][$j]."</font></td>";
+            if($j == 5 || $j == 6){
+//                echo "<td><font color=red>".$week[$i][$j]."</font></td>";
+                if(array_key_exists($week[$i][$j], $activities)){
+    //                    print_r($activities[$week[$i][$j]]['titles']);
+                    $day .= "<td><b> <a style='color: wheat' class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'> >></a> ".$week[$i][$j] . "  <<Посмотреть день</a></b><br>";
+                    foreach($activities[$week[$i][$j]]['titles'] as $title){
+
+    //                        print_r($title);
+                        $day = $day . "<a href='/activity/show?id=" . $activities[$week[$i][$j]]['id'] ."'><font color=red>". $title ." </font></a><br>";
+    //                        $day = $day . $title;
+                    }
+                    $day .= "</td>";
+                    echo $day;
+                }else{
+                    echo "<td><font color=red>".$week[$i][$j]."</font></td>";
+                }
+            }
             else {
                 if(array_key_exists($week[$i][$j], $activities)){
 //                    print_r($activities[$week[$i][$j]]['titles']);
-                    $day .= "<td> <a class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'>".$week[$i][$j] . "  <<Посмотреть день</a><br>";
+                    $day .= "<td> <a style='color: wheat' class='btn btn-info' href='/single/day?startday=" . $activities[$week[$i][$j]]['startday'] . "'>  >>".$week[$i][$j] . "  <<Посмотреть день</a><br>";
                     foreach($activities[$week[$i][$j]]['titles'] as $title){
 
 //                        print_r($title);
@@ -97,28 +146,6 @@ echo "</tr>";
 echo "</table>";
 ?>
 <br>
-<!--<a class="btn btn-primary"-->
-<!--href="/single/day?startday=2019-07-30">-->
-<!--    Посмотреть какое-то из событий-->
-<!--</a>-->
-
-<?php //var_dump(count($model))?>
-<?php //if (count($model)===0):?>
-<!---->
-<!--    <h2>У вас пока нет активностей</h2>-->
-<!---->
-<!---->
-<?php //else:?>
-<!--    --><?php //foreach ($model as $activity) :?>
-<!--       --><?php ////var_dump($activity[0]['title'])?>
-<!--        <a class="btn btn-default"-->
-<!--           href="/single/day?startday=--><?//=$activity->startday?><!--">-->
-<!--            --><?//=$activity->startday?><!-- нажать, чтобы увидеть активности в этот день.-->
-<!--              --><?php ////var_dump($activity->startday)?>
-<!--        </a></br>-->
-<!--    --><?php //endforeach;?>
-<!---->
-<?php //endif;?>
 <a class="btn btn-default"
                  href="/activity/create">
     Добавить

@@ -3,6 +3,9 @@
  * @var \app\models\Activity $model
  */
 ?>
+<a href="/calendar/show?year=<?=date('Y', strtotime($model->startday))?>&month=<?=date('m', strtotime($model->startday))?>" class="btn btn-info">
+    Календарь
+</a>
     <p><strong><?=$model->user->email?></strong></p>
     <p><strong><?=$model->title?></strong></p>
     <p><strong><?=$model->description?></strong></p>
