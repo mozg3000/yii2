@@ -54,4 +54,24 @@ class ActivityComponent extends Component
     {
         return time() . '_' . $file->getBaseName() . '.' . $file->getExtension();
     }
+    /**
+     * @return Activity[]|null
+     */
+    public function getActiveActivityTodayNotification(): array {
+
+        $result = Activity::find()->
+                            andWhere('startday >= :date', [':date' => date('Y-m-d')])
+                        -> andWhere(['useNotification' => 1])
+                        -> all();
+        return $result;
+    }
+    public function getUserActiveActivityTodayNotification($id): array {
+
+        $result = Activity::find()
+                        ->andWhere('user_id = :id', [':id' =>$id])
+                        -> andWhere('startday >= :date', [':date' => date('Y-m-d')])
+                        -> andWhere(['useNotification' => 1])
+                        -> all();
+        return $result;
+    }
 }

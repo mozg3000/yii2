@@ -59,7 +59,8 @@ class Activity extends ActivityBase
             ['deadline', 'default', 'value' => function($model){
                 return $model->startday;
             }],
-            ['deadline', 'compare', 'compareValue' => 'startday', 'operator' => '>=', 'type' => 'date']
+//            ['deadline', 'compare', 'compareValue' => 'startday', 'operator' => '>=', 'type' => 'date'],
+//            ['deadline', 'compare', 'compareValue' => 'startday', 'operator' => '<=', 'type' => 'date']
         ],
             parent::rules());
     }

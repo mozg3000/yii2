@@ -10,9 +10,23 @@ namespace app\controllers;
 
 
 use app\base\BaseController;
+use yii\filters\PageCache;
 
 class DaoController extends BaseController
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => PageCache::class,
+                 'duration' => 10,
+                 'only' => ['index']
+            ]
+        ];
+    }
+
+
     public function actionIndex(){
 
         $dao = \Yii::$app->dao;
@@ -34,6 +48,14 @@ class DaoController extends BaseController
             'email' => $email,
             'userActivities' => $userActivities
         ]);
+    }
+    public function actionCache(){
+
+        \Yii::$app->cache->set('tst', 'value');
+
+        $val = \Yii::$app->cache->get('tst');
+
+        echo $val;
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use app\rules\OwnerActivityRule;
 
 /**
  * Class m190730_142254_rbac_init

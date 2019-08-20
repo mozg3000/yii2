@@ -48,8 +48,10 @@ class CreateAction extends BaseAction
                 $activity->user_id = \Yii::$app->user->getId();
                 $activity->save();
 //                return var_dump($activity->id, $activity->title);
-
-                return $this->controller->redirect(["/activity/show",'id'=>$activity->id]);
+                $year = date('Y', strtotime($activity->startday));
+                $month = date('m', strtotime($activity->startday));
+//                print_r($month);exit();
+                return $this->controller->redirect(["/calendar/show",'year'=>$year, 'month'=>$month]);
             //}
         }
 
